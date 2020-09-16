@@ -12,6 +12,9 @@ using System.Linq;
 
 namespace ScpListSharp
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public static class Rest
 	{
 		static DateTime NextAllowed = DateTime.Now;
@@ -20,7 +23,7 @@ namespace ScpListSharp
 		/// </summary>
 		/// <param name="id">Account ID of the server. Use "!id" in the server console to obtain the id. </param>
 		/// <param name="key">API key for the account id. Use "!api" in the server console to obtain the key.</param>
-		/// <returns></returns>
+		/// <returns>A list of servers owned by this account</returns>
 		public static async Task<List<SCPServer>> GetOwnServersAsync(int id, string key)
 		{
 			if (NextAllowed > DateTime.Now)
@@ -45,6 +48,12 @@ namespace ScpListSharp
 			return outResponse.Servers;
 		}
 
+		/// <summary>
+		/// Gets a list of servers owned by the provided account
+		/// </summary>
+		/// <param name="id">Account ID of the server. Use "!id" in the server console to obtain the id. </param>
+		/// <param name="key">API key for the account id. Use "!api" in the server console to obtain the key.</param>
+		/// <returns>A list of servers owned by this account</returns>
 		public static List<SCPServer> GetOwnServers(int id, string key)
 		{
 			if (NextAllowed > DateTime.Now)

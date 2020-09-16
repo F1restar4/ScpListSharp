@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 namespace ScpListSharp.Entities
 {
+	/// <summary>
+	/// An SCP server
+	/// </summary>
 	public class SCPServer
 	{
 		/// <summary>
@@ -101,11 +104,21 @@ namespace ScpListSharp.Entities
 		}
 	}
 
+	/// <summary>
+	/// A player currently connected to the server
+	/// </summary>
 	public struct SCPPlayer
 	{
+		/// <summary>
+		/// The player's ID
+		/// Will be formatted as id@platform
+		/// </summary>
 		[JsonProperty]
 		public string ID { get; internal set; }
 
+		/// <summary>
+		/// The player's name
+		/// </summary>
 		[JsonProperty]
 		public string Name { get; internal set; }
 

@@ -6,6 +6,16 @@
     <Authors>F1restar4</Authors>
     <Company />
     <PackageId>ScpListSharp</PackageId>
+    <Version>1.0.1</Version>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netcoreapp3.1|AnyCPU'">
+    <DocumentationFile>C:\Users\popco\Desktop\CodingStuff\C#\ScpListSharp\ScpListSharp.xml</DocumentationFile>
+    <OutputPath>bin\Debug\</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netcoreapp3.1|AnyCPU'">
+    <DocumentationFile>C:\Users\popco\Desktop\CodingStuff\C#\ScpListSharp\ScpListSharp.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
