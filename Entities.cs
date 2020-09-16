@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace ScpListSharp.Entities
 {
-	public struct SCPServer
+	public class SCPServer
 	{
 		/// <summary>
 		/// The server's ID
@@ -39,6 +39,10 @@ namespace ScpListSharp.Entities
 		[JsonProperty]
 		public List<SCPPlayer> PlayerList { get; internal set; }
 
+		/// <summary>
+		/// The server title.
+		/// This will include any formatting.
+		/// </summary>
 		[JsonProperty]
 		public string Info { get; internal set; }
 
@@ -78,6 +82,7 @@ namespace ScpListSharp.Entities
 		[JsonProperty]
 		public bool Suppress { get; internal set; }
 
+		[JsonConstructor]
 		internal SCPServer(int ID, int Port, DateTime LastOnline, string Players, List<SCPPlayer> PlayerList, string Info, string Version, string Pastebin, bool FF, bool WL, bool Modded, int Mods, bool Suppress)
 		{
 			this.ID = ID;
@@ -103,6 +108,8 @@ namespace ScpListSharp.Entities
 
 		[JsonProperty]
 		public string Name { get; internal set; }
+
+		[JsonConstructor]
 		internal SCPPlayer(string ID, string Name)
 		{
 			this.ID = ID;
@@ -110,7 +117,7 @@ namespace ScpListSharp.Entities
 		}
 	}
 
-	internal struct SCPServersResponse
+	internal class SCPServersResponse
 	{
 		[JsonProperty]
 		public bool Success { get; internal set; }
@@ -121,6 +128,7 @@ namespace ScpListSharp.Entities
 		[JsonProperty]
 		public List<SCPServer> Servers { get; internal set; }
 
+		[JsonConstructor]
 		internal SCPServersResponse(bool Success, int Cooldown, List<SCPServer> Servers)
 		{
 			this.Success = Success;

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using ScpListSharp.Entities;
 using System.Net;
 using System.IO;
+using System.Linq;
 
 namespace ScpListSharp
 {
@@ -37,6 +38,10 @@ namespace ScpListSharp
 			}
 			var outResponse = JsonConvert.DeserializeObject<SCPServersResponse>(data);
 			NextAllowed = DateTime.Now.AddSeconds(outResponse.Cooldown);
+			foreach (var cur in outResponse.Servers)
+			{
+				cur.Info = Encoding.UTF8.GetString(Convert.FromBase64String(cur.Info));
+			}
 			return outResponse.Servers;
 		}
 
@@ -57,6 +62,10 @@ namespace ScpListSharp
 			}
 			var outResponse = JsonConvert.DeserializeObject<SCPServersResponse>(data);
 			NextAllowed = DateTime.Now.AddSeconds(outResponse.Cooldown);
+			foreach (var cur in outResponse.Servers)
+			{
+				cur.Info = Encoding.UTF8.GetString(Convert.FromBase64String(cur.Info));
+			}
 			return outResponse.Servers;
 		}
 	}
