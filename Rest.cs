@@ -2,13 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
-using System.Web;
-using System.Net.Http;
 using System.Threading.Tasks;
 using ScpListSharp.Entities;
 using System.Net;
 using System.IO;
-using System.Linq;
 
 namespace ScpListSharp
 {
@@ -18,18 +15,31 @@ namespace ScpListSharp
 	public static class Rest
 	{
 		static DateTime NextAllowed = DateTime.Now;
+
 		/// <summary>
 		/// Gets a list of servers owned by the provided account
 		/// </summary>
 		/// <param name="id">Account ID of the server. Use "!id" in the server console to obtain the id. </param>
 		/// <param name="key">API key for the account id. Use "!api" in the server console to obtain the key.</param>
+		/// <param name="LastOnline">Adds "LastOnline" field to the response.</param>
+		/// <param name="Players">Adds "Players" field to the response.</param>
+		/// <param name="PlayerList">Adds "PlayersList" field to the response.</param>
+		/// <param name="Info">Adds "Info" field to the response.</param>
+		/// <param name="Pastebin">Adds "Pastebin" field to the response.</param>
+		/// <param name="Version">Adds "Version" field to the response.</param>
+		/// <param name="Flags">Adds flags (eg. friendly-fire, whitelist) to the response.</param>
+		/// <param name="Nicknames">Adds nicknames to the "PlayersList". Ignored if "list" parameter is not set to true.</param>
 		/// <returns>A list of servers owned by this account</returns>
-		public static async Task<List<SCPServer>> GetOwnServersAsync(int id, string key)
+		public static async Task<List<SCPServer>> GetOwnServersAsync(int id = 0, string key = null, bool LastOnline = true, bool Players = true, bool PlayerList = true, bool Info = true, bool Pastebin = true, bool Version = true, bool Flags = true, bool Nicknames = true)
 		{
 			if (NextAllowed > DateTime.Now)
 				throw new WebException($"You are being rate limited, try again at: {NextAllowed}");
 
-			string url = $"https://api.scpslgame.com/serverinfo.php?id={id}&key={key}&lo=true&players=true&list=true&info=true&pastebin=true&version=true&flags=true&nicknames=true";
+			string url = "https://api.scpslgame.com/serverinfo.php?";
+			if (key != null)
+				url += $"id={id}&key={key}";
+			url += $"&lo={LastOnline}&players={Players}&list={PlayerList}&info={Info}&pastebin={Pastebin}&version={Version}&flags={Flags}&nicknames={Nicknames}";
+
 			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
 			request.ContentType = "application/json";
 			string data;
@@ -53,13 +63,25 @@ namespace ScpListSharp
 		/// </summary>
 		/// <param name="id">Account ID of the server. Use "!id" in the server console to obtain the id. </param>
 		/// <param name="key">API key for the account id. Use "!api" in the server console to obtain the key.</param>
+		/// <param name="LastOnline">Adds "LastOnline" field to the response.</param>
+		/// <param name="Players">Adds "Players" field to the response.</param>
+		/// <param name="PlayerList">Adds "PlayersList" field to the response.</param>
+		/// <param name="Info">Adds "Info" field to the response.</param>
+		/// <param name="Pastebin">Adds "Pastebin" field to the response.</param>
+		/// <param name="Version">Adds "Version" field to the response.</param>
+		/// <param name="Flags">Adds flags (eg. friendly-fire, whitelist) to the response.</param>
+		/// <param name="Nicknames">Adds nicknames to the "PlayersList". Ignored if "list" parameter is not set to true.</param>
 		/// <returns>A list of servers owned by this account</returns>
-		public static List<SCPServer> GetOwnServers(int id, string key)
+		public static List<SCPServer> GetOwnServers(int id = 0, string key = null, bool LastOnline = true, bool Players = true, bool PlayerList = true, bool Info = true, bool Pastebin = true, bool Version = true, bool Flags = true, bool Nicknames = true)
 		{
 			if (NextAllowed > DateTime.Now)
 				throw new WebException($"You are being rate limited, try again at: {NextAllowed}");
 
-			string url = $"https://api.scpslgame.com/serverinfo.php?id={id}&key={key}&lo=true&players=true&list=true&info=true&pastebin=true&version=true&flags=true&nicknames=true";
+			string url = "https://api.scpslgame.com/serverinfo.php?";
+			if (key != null)
+				url += $"id={id}&key={key}";
+			url += $"&lo={LastOnline}&players={Players}&list={PlayerList}&info={Info}&pastebin={Pastebin}&version={Version}&flags={Flags}&nicknames={Nicknames}";
+
 			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
 			request.ContentType = "application/json";
 			string data;
@@ -76,6 +98,37 @@ namespace ScpListSharp
 				cur.Info = Encoding.UTF8.GetString(Convert.FromBase64String(cur.Info));
 			}
 			return outResponse.Servers;
+		}
+
+		/// <summary>
+		/// Returns current IP.
+		/// </summary>
+		/// <returns>Current IP</returns>
+		public static async Task<string> GetIPAsync()
+		{
+			var request = WebRequest.CreateHttp("https://api.scpslgame.com/ip.php");
+			var response = request.GetResponse();
+			using (var responseStream = response.GetResponseStream() ?? Stream.Null)
+			using (var responseReader = new StreamReader(responseStream))
+			{
+				return await responseReader.ReadToEndAsync();
+			}
+		}
+
+
+		/// <summary>
+		/// Returns current IP.
+		/// </summary>
+		/// <returns>Current IP</returns>
+		public static string GetIP()
+		{
+			var request = WebRequest.CreateHttp("https://api.scpslgame.com/ip.php");
+			var response = request.GetResponse();
+			using (var responseStream = response.GetResponseStream() ?? Stream.Null)
+			using (var responseReader = new StreamReader(responseStream))
+			{
+				return responseReader.ReadToEnd();
+			}
 		}
 	}
 }
