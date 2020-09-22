@@ -6,9 +6,11 @@
     <Authors>F1restar4</Authors>
     <Company />
     <PackageId>ScpListSharp</PackageId>
-    <Version>1.0.1</Version>
+    <Version>1.0.4</Version>
+		<RepositoryUrl>https://github.com/F1restar4/ScpListSharp/</RepositoryUrl>
+	  <RepositoryType>git</RepositoryType>
   </PropertyGroup>
-
+	
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netcoreapp3.1|AnyCPU'">
     <DocumentationFile>C:\Users\popco\Desktop\CodingStuff\C#\ScpListSharp\ScpListSharp.xml</DocumentationFile>
     <OutputPath>bin\Debug\</OutputPath>
