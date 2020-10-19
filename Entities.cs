@@ -22,6 +22,12 @@ namespace ScpListSharp.Entities
 		public int Port { get; internal set; }
 
 		/// <summary>
+		/// Whether or not the server is currently online
+		/// </summary>
+		[JsonProperty]
+		public bool Online { get; internal set; }
+
+		/// <summary>
 		/// Last time the server was online. 
 		/// This will only have a date
 		/// </summary>

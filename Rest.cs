@@ -29,8 +29,9 @@ namespace ScpListSharp
 		/// <param name="Version">Adds "Version" field to the response.</param>
 		/// <param name="Flags">Adds flags (eg. friendly-fire, whitelist) to the response.</param>
 		/// <param name="Nicknames">Adds nicknames to the "PlayersList". Ignored if "list" parameter is not set to true.</param>
+		/// <param name="Online">Adds "Online" (value true if the server is online) to the response.</param>
 		/// <returns>A list of servers owned by this account</returns>
-		public static async Task<List<SCPServer>> GetOwnServersAsync(int id = 0, string key = null, bool LastOnline = true, bool Players = true, bool PlayerList = true, bool Info = true, bool Pastebin = true, bool Version = true, bool Flags = true, bool Nicknames = true)
+		public static async Task<List<SCPServer>> GetOwnServersAsync(int id = 0, string key = null, bool LastOnline = true, bool Players = true, bool PlayerList = true, bool Info = true, bool Pastebin = true, bool Version = true, bool Flags = true, bool Nicknames = true, bool Online = true)
 		{
 			if (NextAllowed > DateTime.Now)
 				throw new WebException($"You are being rate limited, try again at: {NextAllowed}");
@@ -38,7 +39,7 @@ namespace ScpListSharp
 			string url = "https://api.scpslgame.com/serverinfo.php?";
 			if (key != null)
 				url += $"id={id}&key={key}";
-			url += $"&lo={LastOnline}&players={Players}&list={PlayerList}&info={Info}&pastebin={Pastebin}&version={Version}&flags={Flags}&nicknames={Nicknames}";
+			url += $"&lo={LastOnline}&players={Players}&list={PlayerList}&info={Info}&pastebin={Pastebin}&version={Version}&flags={Flags}&nicknames={Nicknames}&online={Online}";
 
 			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
 			request.ContentType = "application/json";
@@ -71,8 +72,9 @@ namespace ScpListSharp
 		/// <param name="Version">Adds "Version" field to the response.</param>
 		/// <param name="Flags">Adds flags (eg. friendly-fire, whitelist) to the response.</param>
 		/// <param name="Nicknames">Adds nicknames to the "PlayersList". Ignored if "list" parameter is not set to true.</param>
+		/// <param name="Online">Adds "Online" (value true if the server is online) to the response.</param>
 		/// <returns>A list of servers owned by this account</returns>
-		public static List<SCPServer> GetOwnServers(int id = 0, string key = null, bool LastOnline = true, bool Players = true, bool PlayerList = true, bool Info = true, bool Pastebin = true, bool Version = true, bool Flags = true, bool Nicknames = true)
+		public static List<SCPServer> GetOwnServers(int id = 0, string key = null, bool LastOnline = true, bool Players = true, bool PlayerList = true, bool Info = true, bool Pastebin = true, bool Version = true, bool Flags = true, bool Nicknames = true, bool Online = true)
 		{
 			if (NextAllowed > DateTime.Now)
 				throw new WebException($"You are being rate limited, try again at: {NextAllowed}");
@@ -80,7 +82,7 @@ namespace ScpListSharp
 			string url = "https://api.scpslgame.com/serverinfo.php?";
 			if (key != null)
 				url += $"id={id}&key={key}";
-			url += $"&lo={LastOnline}&players={Players}&list={PlayerList}&info={Info}&pastebin={Pastebin}&version={Version}&flags={Flags}&nicknames={Nicknames}";
+			url += $"&lo={LastOnline}&players={Players}&list={PlayerList}&info={Info}&pastebin={Pastebin}&version={Version}&flags={Flags}&nicknames={Nicknames}&online={Online}";
 
 			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
 			request.ContentType = "application/json";
