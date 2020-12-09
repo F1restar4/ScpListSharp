@@ -31,7 +31,7 @@ namespace ScpListSharp
 		/// <param name="Nicknames">Adds nicknames to the "PlayersList". Ignored if "list" parameter is not set to true.</param>
 		/// <param name="Online">Adds "Online" (value true if the server is online) to the response.</param>
 		/// <returns>A list of servers owned by this account</returns>
-		public static async Task<List<SCPServer>> GetOwnServersAsync(int id = 0, string key = null, bool LastOnline = true, bool Players = true, bool PlayerList = true, bool Info = true, bool Pastebin = true, bool Version = true, bool Flags = true, bool Nicknames = true, bool Online = true)
+		public static async Task<List<SCPServer>> GetOwnServersAsync(int id = 0, string key = null, bool LastOnline = false, bool Players = false, bool PlayerList = false, bool Info = false, bool Pastebin = false, bool Version = false, bool Flags = false, bool Nicknames = false, bool Online = false)
 		{
 			if (NextAllowed > DateTime.Now)
 				throw new WebException($"You are being rate limited, try again at: {NextAllowed}");
@@ -74,7 +74,7 @@ namespace ScpListSharp
 		/// <param name="Nicknames">Adds nicknames to the "PlayersList". Ignored if "list" parameter is not set to true.</param>
 		/// <param name="Online">Adds "Online" (value true if the server is online) to the response.</param>
 		/// <returns>A list of servers owned by this account</returns>
-		public static List<SCPServer> GetOwnServers(int id = 0, string key = null, bool LastOnline = true, bool Players = true, bool PlayerList = true, bool Info = true, bool Pastebin = true, bool Version = true, bool Flags = true, bool Nicknames = true, bool Online = true)
+		public static List<SCPServer> GetOwnServers(int id = 0, string key = null, bool LastOnline = false, bool Players = false, bool PlayerList = false, bool Info = false, bool Pastebin = false, bool Version = false, bool Flags = false, bool Nicknames = false, bool Online = false)
 		{
 			if (NextAllowed > DateTime.Now)
 				throw new WebException($"You are being rate limited, try again at: {NextAllowed}");
