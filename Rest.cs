@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
-using ScpListSharp.Entities;
+using Firestar4.ScpListSharp.Entities;
 using System.Net;
 using System.IO;
 
-namespace ScpListSharp
+namespace Firestar4.ScpListSharp
 {
 	/// <summary>
 	/// 

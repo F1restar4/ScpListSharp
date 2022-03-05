@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace ScpListSharp.Entities
+namespace Firestar4.ScpListSharp.Entities
 {
 	/// <summary>
 	/// An SCP server
