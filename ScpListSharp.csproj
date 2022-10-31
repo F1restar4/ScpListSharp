@@ -6,7 +6,7 @@
     <Authors>F1restar4</Authors>
     <Company />
     <PackageId>ScpListSharp</PackageId>
-    <Version>1.0.8</Version>
+    <Version>1.0.9</Version>
 		<RepositoryUrl>https://github.com/F1restar4/ScpListSharp/</RepositoryUrl>
 	  <RepositoryType>git</RepositoryType>
   </PropertyGroup>
